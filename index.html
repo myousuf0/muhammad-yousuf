@@ -1,0 +1,777 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <title>Muhammad Yousuf Siddiqui — Creative Full‑Stack Architect</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@200;300;400;500&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; background: #000; }
+    body {
+      background: #000;
+      color: #F5F5F7;
+      font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      overflow-x: hidden;
+      cursor: none;
+      line-height: 1.4;
+    }
+    ::-webkit-scrollbar { width: 2px; }
+    ::-webkit-scrollbar-track { background: #000; }
+    ::-webkit-scrollbar-thumb { background: rgba(229,229,229,0.18); border-radius: 2px; }
+    ::selection { background: rgba(229,229,229,0.12); color: #fff; }
+
+    @media (pointer: coarse) { body { cursor: auto; } }
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
+    }
+    @media (max-width: 768px) {
+      .desktop-nav { display: none !important; }
+      .skills-grid { grid-template-columns: 1fr !important; }
+      .metrics-grid { grid-template-columns: 1fr 1fr !important; }
+      .metrics-grid > div { border-right: none !important; border-bottom: 1px solid rgba(229,229,229,0.08) !important; }
+      .exp-inner { grid-template-columns: 1fr !important; }
+      .footer-contacts { grid-template-columns: 1fr 1fr !important; }
+      body { cursor: auto; }
+      #cursor-ring, #cursor-dot { display: none; }
+    }
+    @keyframes scrollPulse {
+      0%, 100% { opacity: 0.2; transform: scaleY(1); }
+      50% { opacity: 0.8; transform: scaleY(1.4); }
+    }
+    @keyframes fadeFloat {
+      0%, 100% { transform: translateY(0px); }
+      50% { transform: translateY(-6px); }
+    }
+  </style>
+</head>
+<body>
+
+<!-- Custom cursor (professional, refined) -->
+<div id="cursor-ring" style="
+  position:fixed; width:32px; height:32px; border-radius:50%;
+  border:1px solid rgba(229,229,229,0.35); pointer-events:none;
+  z-index:99999; left:0; top:0; transform:translate(-50%,-50%);
+  transition:transform 0.35s cubic-bezier(0.16,1,0.3,1), border-color 0.25s;
+  mix-blend-mode:difference; will-change: transform;
+"></div>
+<div id="cursor-dot" style="
+  position:fixed; width:4px; height:4px; border-radius:50%;
+  background:#fff; pointer-events:none; z-index:99999;
+  left:0; top:0; transform:translate(-50%,-50%);
+  box-shadow: 0 0 10px rgba(255,255,255,0.5);
+"></div>
+
+<!-- Preloader (refined timing & class) -->
+<div id="preloader" style="
+  position:fixed; inset:0; z-index:9999;
+  background:#000; display:flex; align-items:center; justify-content:center; flex-direction:column;
+  transition: opacity 0.9s cubic-bezier(0.4,0,0.2,1), transform 0.9s cubic-bezier(0.4,0,0.2,1);
+">
+  <div style="position:relative; margin-bottom:28px;">
+    <span id="preloader-num" style="
+      font-family:'Plus Jakarta Sans',monospace; font-size:clamp(4.5rem,13vw,10rem);
+      font-weight:200; letter-spacing:-0.05em; line-height:1;
+      background:linear-gradient(180deg,#fff 0%,#4a4a4a 100%);
+      -webkit-background-clip:text; -webkit-text-fill-color:transparent;
+      background-clip:text;
+    ">0</span>
+    <span style="
+      position:absolute; top:6px; right:-26px;
+      font-family:monospace; font-size:1.4rem; color:#86868B;
+    ">%</span>
+  </div>
+  <p style="font-family:monospace; font-size:0.62rem; letter-spacing:0.28em; text-transform:uppercase; color:#86868B;">
+    Initializing Experience
+  </p>
+  <div style="margin-top:44px; width:140px; height:1px; background:#111; overflow:hidden;">
+    <div id="preloader-bar" style="height:100%; background:#E5E5E5; width:0%; transition:width 0.3s ease;"></div>
+  </div>
+</div>
+
+<!-- NAVBAR (polished glass effect) -->
+<header id="navbar" style="
+  position:fixed; top:0; left:0; width:100%; z-index:1000;
+  transition:background 0.45s ease, border-color 0.45s ease, backdrop-filter 0.45s ease;
+  background:transparent; border-bottom:1px solid transparent;
+">
+  <div style="max-width:1280px; margin:0 auto; padding:0 32px;
+    display:flex; align-items:center; justify-content:space-between; height:76px;">
+    <a href="#hero" class="nav-logo" style="
+      font-family:'Plus Jakarta Sans',sans-serif; font-size:0.75rem; font-weight:300;
+      letter-spacing:0.18em; color:#F5F5F7; text-decoration:none; text-transform:uppercase;
+      transition: opacity 0.3s;
+    " onmouseenter="this.style.opacity='0.8'" onmouseleave="this.style.opacity='1'">Yousuf.Siddiqui</a>
+
+    <nav class="desktop-nav" style="display:flex; gap:40px; align-items:center;">
+      <a href="#skills" class="nav-link">Skills</a>
+      <a href="#experience" class="nav-link">Experience</a>
+      <a href="#contact" class="nav-link">Contact</a>
+    </nav>
+
+    <a href="mailto:Myswork14@gmail.com" class="nav-cta" style="
+      font-family:'Plus Jakarta Sans',sans-serif; font-size:0.68rem; font-weight:300;
+      letter-spacing:0.15em; color:#F5F5F7; text-decoration:none; text-transform:uppercase;
+      padding:10px 24px; border:1px solid rgba(229,229,229,0.22); border-radius:100px;
+      transition:all 0.3s ease; background: transparent;
+    ">Hire Me</a>
+  </div>
+  <style>
+    .nav-link {
+      font-family:'Plus Jakarta Sans',sans-serif; font-size:0.72rem; font-weight:300;
+      letter-spacing:0.12em; color:#86868B; text-decoration:none; text-transform:uppercase;
+      transition:color 0.3s ease; position: relative;
+    }
+    .nav-link::after {
+      content: ''; position: absolute; bottom: -4px; left: 0; width: 0;
+      height: 1px; background: #F5F5F7; transition: width 0.3s ease;
+    }
+    .nav-link:hover { color:#F5F5F7; }
+    .nav-link:hover::after { width: 100%; }
+    .nav-cta:hover { border-color:rgba(229,229,229,0.65) !important; background:rgba(229,229,229,0.05) !important; }
+  </style>
+</header>
+
+<!-- HERO (unchanged structure, refined colors) -->
+<section id="hero" style="
+  min-height:100vh; display:flex; align-items:center; justify-content:center;
+  position:relative; background:#000; overflow:hidden;
+">
+  <canvas id="particle-canvas" style="position:absolute; inset:0; pointer-events:none; z-index:0;"></canvas>
+  <div style="
+    position:absolute; inset:0; pointer-events:none; z-index:1;
+    background:radial-gradient(ellipse 80% 60% at 50% 40%, rgba(255,255,255,0.025) 0%, transparent 70%);
+  "></div>
+
+  <div style="
+    position:relative; z-index:2;
+    max-width:1280px; margin:0 auto; padding:120px 32px 80px; width:100%;
+  ">
+    <div id="hero-eyebrow" style="
+      display:flex; align-items:center; gap:16px; margin-bottom:32px;
+      opacity:0; transform:translateY(24px); transition:opacity 0.8s ease, transform 0.8s ease;
+    ">
+      <span style="width:28px; height:1px; background:rgba(229,229,229,0.3); display:inline-block;"></span>
+      <span style="font-family:monospace; font-size:0.62rem; letter-spacing:0.28em; color:#86868B; text-transform:uppercase;">
+        Creative Full‑Stack Architect
+      </span>
+    </div>
+
+    <div id="hero-name" style="line-height:0.92;">
+      <div style="overflow:hidden;">
+        <h1 class="hero-word" style="
+          font-family:'Plus Jakarta Sans',sans-serif;
+          font-size:clamp(3rem,11vw,10.5rem);
+          font-weight:200; letter-spacing:-0.045em; color:#fff;
+          margin:0; display:inline-block;
+          opacity:0; transform:translateY(110%);
+          transition:opacity 1s ease 0.35s, transform 1s cubic-bezier(0.16,1,0.3,1) 0.35s;
+        ">MUHAMMAD</h1>
+      </div>
+      <div style="overflow:hidden;">
+        <h1 class="hero-word" style="
+          font-family:'Plus Jakarta Sans',sans-serif;
+          font-size:clamp(3rem,11vw,10.5rem);
+          font-weight:200; letter-spacing:-0.045em; color:#fff;
+          margin:0; display:inline-block;
+          opacity:0; transform:translateY(110%);
+          transition:opacity 1s ease 0.47s, transform 1s cubic-bezier(0.16,1,0.3,1) 0.47s;
+        ">YOUSUF</h1>
+      </div>
+      <div style="overflow:hidden;">
+        <h1 class="hero-word" style="
+          font-family:'Plus Jakarta Sans',sans-serif;
+          font-size:clamp(3rem,11vw,10.5rem);
+          font-weight:200; letter-spacing:-0.045em; color:#fff;
+          margin:0; display:inline-block;
+          opacity:0; transform:translateY(110%);
+          transition:opacity 1s ease 0.59s, transform 1s cubic-bezier(0.16,1,0.3,1) 0.59s;
+        ">SIDDIQUI</h1>
+      </div>
+    </div>
+
+    <div id="hero-sub" style="
+      margin-top:44px; display:flex; flex-wrap:wrap; gap:20px; align-items:center;
+      opacity:0; transform:translateY(28px);
+      transition:opacity 0.8s ease 0.8s, transform 0.8s ease 0.8s;
+    ">
+      <span style="font-family:'Plus Jakarta Sans',sans-serif; font-size:clamp(0.8rem,1.8vw,1.05rem); font-weight:300; color:#D4D4D8; letter-spacing:0.01em;">WebGL & Three.js</span>
+      <span style="width:1px; height:14px; background:rgba(229,229,229,0.2);"></span>
+      <span style="font-family:'Plus Jakarta Sans',sans-serif; font-size:clamp(0.8rem,1.8vw,1.05rem); font-weight:300; color:#86868B; letter-spacing:0.01em;">GSAP Motion Design</span>
+      <span style="width:1px; height:14px; background:rgba(229,229,229,0.2);"></span>
+      <span style="font-family:'Plus Jakarta Sans',sans-serif; font-size:clamp(0.8rem,1.8vw,1.05rem); font-weight:300; color:#86868B; letter-spacing:0.01em;">Scalable Backends</span>
+    </div>
+
+    <div id="hero-loc" style="
+      margin-top:20px; opacity:0;
+      transition:opacity 0.8s ease 1s;
+    ">
+      <span style="font-family:monospace; font-size:0.62rem; letter-spacing:0.2em; color:#3a3a3a; text-transform:uppercase;">
+        Karachi, Pakistan → Remote Worldwide
+      </span>
+    </div>
+  </div>
+
+  <div id="scroll-hint" style="
+    position:absolute; bottom:36px; left:50%; transform:translateX(-50%);
+    display:flex; flex-direction:column; align-items:center; gap:10px; z-index:2;
+    opacity:0; transition:opacity 0.8s ease 1.3s;
+  ">
+    <span style="font-family:monospace; font-size:0.58rem; letter-spacing:0.28em; color:#3a3a3a; text-transform:uppercase;">Scroll</span>
+    <div style="width:1px; height:44px; background:linear-gradient(to bottom, rgba(229,229,229,0.35), transparent); animation:scrollPulse 2.4s ease-in-out infinite;"></div>
+  </div>
+</section>
+
+<!-- METRICS (cleaner borders) -->
+<section id="metrics" style="background:#0A0A0A; border-top:1px solid rgba(229,229,229,0.07); padding:80px 0;">
+  <div style="max-width:1280px; margin:0 auto; padding:0 32px;">
+    <div class="metrics-grid" style="
+      display:grid; grid-template-columns:repeat(4,1fr);
+      border:1px solid rgba(229,229,229,0.07); border-radius: 12px; overflow: hidden;
+    ">
+      <div class="metric-cell" data-target="6" data-suffix="+" style="padding:44px 28px; border-right:1px solid rgba(229,229,229,0.07); text-align:center; transition:background 0.4s ease; cursor:default;">
+        <div><span class="metric-num" style="font-family:'Plus Jakarta Sans',sans-serif; font-size:clamp(2.2rem,5vw,3.8rem); font-weight:200; letter-spacing:-0.04em; color:#fff;">0</span><span class="metric-suf" style="font-family:'Plus Jakarta Sans',sans-serif; font-size:clamp(2.2rem,5vw,3.8rem); font-weight:200; color:#fff;">+</span></div>
+        <p style="font-family:'Plus Jakarta Sans',sans-serif; font-size:0.72rem; font-weight:300; color:#86868B; letter-spacing:0.04em; line-height:1.6; max-width:130px; margin:10px auto 0;">Years Full-Stack Experience</p>
+      </div>
+      <div class="metric-cell" data-target="12000" data-suffix="+" style="padding:44px 28px; border-right:1px solid rgba(229,229,229,0.07); text-align:center; transition:background 0.4s ease; cursor:default;">
+        <div><span class="metric-num" style="font-family:'Plus Jakarta Sans',sans-serif; font-size:clamp(2.2rem,5vw,3.8rem); font-weight:200; letter-spacing:-0.04em; color:#fff;">0</span><span class="metric-suf" style="font-family:'Plus Jakarta Sans',sans-serif; font-size:clamp(2.2rem,5vw,3.8rem); font-weight:200; color:#fff;">+</span></div>
+        <p style="font-family:'Plus Jakarta Sans',sans-serif; font-size:0.72rem; font-weight:300; color:#86868B; letter-spacing:0.04em; line-height:1.6; max-width:130px; margin:10px auto 0;">WooCommerce Products Optimized</p>
+      </div>
+      <div class="metric-cell" data-target="15" data-suffix="+" style="padding:44px 28px; border-right:1px solid rgba(229,229,229,0.07); text-align:center; transition:background 0.4s ease; cursor:default;">
+        <div><span class="metric-num" style="font-family:'Plus Jakarta Sans',sans-serif; font-size:clamp(2.2rem,5vw,3.8rem); font-weight:200; letter-spacing:-0.04em; color:#fff;">0</span><span class="metric-suf" style="font-family:'Plus Jakarta Sans',sans-serif; font-size:clamp(2.2rem,5vw,3.8rem); font-weight:200; color:#fff;">+</span></div>
+        <p style="font-family:'Plus Jakarta Sans',sans-serif; font-size:0.72rem; font-weight:300; color:#86868B; letter-spacing:0.04em; line-height:1.6; max-width:130px; margin:10px auto 0;">Legacy Sites Refactored</p>
+      </div>
+      <div class="metric-cell" data-target="4" data-suffix="" style="padding:44px 28px; text-align:center; transition:background 0.4s ease; cursor:default;">
+        <div><span class="metric-num" style="font-family:'Plus Jakarta Sans',sans-serif; font-size:clamp(2.2rem,5vw,3.8rem); font-weight:200; letter-spacing:-0.04em; color:#fff;">0</span><span class="metric-suf" style="font-family:'Plus Jakarta Sans',sans-serif; font-size:clamp(2.2rem,5vw,3.8rem); font-weight:200; color:#fff;"></span></div>
+        <p style="font-family:'Plus Jakarta Sans',sans-serif; font-size:0.72rem; font-weight:300; color:#86868B; letter-spacing:0.04em; line-height:1.6; max-width:130px; margin:10px auto 0;">Junior Developers Mentored</p>
+      </div>
+    </div>
+  </div>
+  <style>
+    .metric-cell:hover { background: rgba(229,229,229,0.03) !important; }
+  </style>
+</section>
+
+<!-- PROFESSIONAL SUMMARY (elegant card style) -->
+<section style="background:#000; padding:96px 0; border-top:1px solid rgba(229,229,229,0.07);">
+  <div style="max-width:1280px; margin:0 auto; padding:0 32px;">
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:start;background: #000 !important;" class="summary-grid">
+      <div class="sticky-heading" style="position: sticky;top:96px;align-self:start;background-color: #000 !important;">
+        <div style="width:32px; height:1px; background:rgba(229,229,229,0.25); margin-bottom:24px;"></div>
+        <h2 style="
+          font-family:'Plus Jakarta Sans',sans-serif;
+          font-size:clamp(1.6rem,3vw,2.5rem); font-weight:200;
+          color:#fff; letter-spacing:-0.03em; line-height:1.25;
+        ">Full-Stack Architect with 6+ years engineering high‑performance web ecosystems</h2>
+        <div style="margin-top:20px; display:flex; align-items:center; gap:12px;">
+          <span style="font-family:monospace; font-size:0.6rem; letter-spacing:0.2em; color:#86868B; text-transform:uppercase;">From vision to execution</span>
+          <span style="flex:1; height:1px; background:rgba(229,229,229,0.08);"></span>
+        </div>
+      </div>
+      <div style="display:flex; flex-direction:column; gap:16px;">
+        <div class="reveal-card" style="padding: 32px; border: 1px solid rgba(229, 229, 229, 0.1); border-radius: 16px; transition: opacity 0.8s, transform 0.85s cubic-bezier(0.16, 1, 0.3, 1); opacity: 1; transform: translate(0px, 0px);">
+          <h3 style="font-family:'Plus Jakarta Sans',sans-serif; font-size:1.05rem; font-weight:300; color:#F5F5F7; letter-spacing:-0.01em; margin-bottom:10px;">Immersive Frontend Engineering</h3>
+          <p style="font-family:'Plus Jakarta Sans',sans-serif; font-size:0.8rem; font-weight:300; color:#86868B; line-height:1.8; margin-bottom:18px;">Pioneering cinematic frontends powered by Three.js WebGL environments, GSAP-driven narrative scroll animations, and Framer Motion micro-interactions that measurably differentiate clients from market competitors.</p>
+          <div style="display:flex; align-items:center; gap:10px;">
+            <span style="font-family:monospace; font-size:0.58rem; letter-spacing:0.2em; color:rgba(255,255,255,0.3); text-transform:uppercase;">Impact</span>
+            <span style="font-family:'Plus Jakarta Sans',sans-serif; font-size:0.72rem; font-weight:300; color:rgba(255,255,255,0.55);">95+ Lighthouse scores on creative-heavy builds</span>
+          </div>
+        </div>
+        <div class="reveal-card" style="padding: 32px; border: 1px solid rgba(229, 229, 229, 0.1); border-radius: 16px; transition: opacity 0.8s 0.07s, transform 0.85s cubic-bezier(0.16, 1, 0.3, 1) 0.07s; opacity: 1; transform: translate(0px, 0px);">
+          <h3 style="font-family:'Plus Jakarta Sans',sans-serif; font-size:1.05rem; font-weight:300; color:#F5F5F7; letter-spacing:-0.01em; margin-bottom:10px;">Robust Backend Architecture</h3>
+          <p style="font-family:'Plus Jakarta Sans',sans-serif; font-size:0.8rem; font-weight:300; color:#86868B; line-height:1.8; margin-bottom:18px;">Engineering scalable, high-performance ecosystems with Custom PHP (OOP/MVC), Node.js, and MySQL. Strategic query refactoring and multi-column indexing cutting average API response times by 60%.</p>
+          <div style="display:flex; align-items:center; gap:10px;">
+            <span style="font-family:monospace; font-size:0.58rem; letter-spacing:0.2em; color:rgba(255,255,255,0.3); text-transform:uppercase;">Impact</span>
+            <span style="font-family:'Plus Jakarta Sans',sans-serif; font-size:0.72rem; font-weight:300; color:rgba(255,255,255,0.55);">12,000+ product catalog with sub-2-second load times</span>
+          </div>
+        </div>
+        <div class="reveal-card" style="padding: 32px; border: 1px solid rgba(229, 229, 229, 0.1); border-radius: 16px; transition: opacity 0.8s 0.14s, transform 0.85s cubic-bezier(0.16, 1, 0.3, 1) 0.14s; opacity: 1; transform: translate(0px, 0px);">
+          <h3 style="font-family:'Plus Jakarta Sans',sans-serif; font-size:1.05rem; font-weight:300; color:#F5F5F7; letter-spacing:-0.01em; margin-bottom:10px;">AI-Augmented Development</h3>
+          <p style="font-family:'Plus Jakarta Sans',sans-serif; font-size:0.8rem; font-weight:300; color:#86868B; line-height:1.8; margin-bottom:18px;">Actively leveraging AI-augmented development pipelines (ChatGPT, DeepSeek, Claude) to compress delivery timelines by 35% while elevating code quality. Practical knowledge of LLM Firewall architecture and Prompt Injection prevention.</p>
+          <div style="display:flex; align-items:center; gap:10px;">
+            <span style="font-family:monospace; font-size:0.58rem; letter-spacing:0.2em; color:rgba(255,255,255,0.3); text-transform:uppercase;">Impact</span>
+            <span style="font-family:'Plus Jakarta Sans',sans-serif; font-size:0.72rem; font-weight:300; color:rgba(255,255,255,0.55);">35% accelerated sprint velocity without code compromise</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <style>
+    .reveal-card:hover { border-color:rgba(229,229,229,0.28) !important; background:rgba(229,229,229,0.03) !important; transform: translateY(-2px); }
+    @media(max-width:768px){ 
+      .summary-grid { 
+        grid-template-columns:1fr !important; 
+        gap: 0px !important; 
+      }
+      .sticky-heading {
+        position: -webkit-sticky !important;
+        position: sticky !important;
+        top: 0 !important;
+        z-index: 10 !important;
+        padding-top: 75px;
+        padding-bottom: 24px;
+        background-color: #000 !important;
+      }
+      .reveal-card {
+        background-color: #000 !important;
+        position: relative;
+        z-index: 1;
+      }
+    }
+  </style>
+</section>
+
+<!-- SKILLS (refined hover states) -->
+<section id="skills" style="background:#0A0A0A; padding:96px 0; border-top:1px solid rgba(229,229,229,0.07);">
+  <div style="max-width:1280px; margin:0 auto; padding:0 32px;">
+    <div class="section-header" style="margin-bottom:56px; opacity:0; transform:translateY(24px); transition:opacity 0.7s ease, transform 0.7s ease;">
+      <div style="display:flex; align-items:center; gap:12px; margin-bottom:14px;">
+        <span style="width:22px; height:1px; background:rgba(229,229,229,0.3);"></span>
+        <span style="font-family:monospace; font-size:0.6rem; letter-spacing:0.28em; color:#86868B; text-transform:uppercase;">Expertise</span>
+      </div>
+      <h2 style="font-family:'Plus Jakarta Sans',sans-serif; font-size:clamp(2rem,5vw,3.8rem); font-weight:200; color:#fff; letter-spacing:-0.04em;">Skills Architecture</h2>
+    </div>
+
+    <div id="skills-list">
+      <div class="skill-row" style="border-top:1px solid rgba(229,229,229,0.07); padding:26px 0; cursor:default; transition:background 0.3s;">
+        <div class="skills-grid" style="display:grid; grid-template-columns:40px 1fr 1.6fr; gap:28px; align-items:start;">
+          <span style="font-family:monospace; font-size:0.6rem; color:#2a2a2a; letter-spacing:0.1em; padding-top:3px;">01</span>
+          <div>
+            <h3 class="skill-title" style="font-family:'Plus Jakarta Sans',sans-serif; font-size:clamp(0.95rem,1.8vw,1.2rem); font-weight:300; color:#D4D4D8; letter-spacing:-0.02em; margin-bottom:0; transition:color 0.3s;">Core Frontend Engineering</h3>
+            <p class="skill-desc" style="font-family:'Plus Jakarta Sans',sans-serif; font-size:0.75rem; color:#86868B; font-weight:300; line-height:1.7; max-height:0; overflow:hidden; opacity:0; transition:max-height 0.4s ease, opacity 0.4s ease; margin-top:0;">Modern component-driven architecture with pixel-perfect precision.</p>
+          </div>
+          <div style="display:flex; flex-wrap:wrap; gap:7px; padding-top:2px;">
+            <span class="skill-tag">JavaScript ES6+</span><span class="skill-tag">React.js</span><span class="skill-tag">HTML5 & CSS3</span><span class="skill-tag">Sass/SCSS</span><span class="skill-tag">Tailwind CSS</span><span class="skill-tag">Responsive Design</span>
+          </div>
+        </div>
+      </div>
+      <div class="skill-row" style="border-top:1px solid rgba(229,229,229,0.07); padding:26px 0; cursor:default; transition:background 0.3s;">
+        <div class="skills-grid" style="display:grid; grid-template-columns:40px 1fr 1.6fr; gap:28px; align-items:start;">
+          <span style="font-family:monospace; font-size:0.6rem; color:#2a2a2a; letter-spacing:0.1em; padding-top:3px;">02</span>
+          <div>
+            <h3 class="skill-title" style="font-family:'Plus Jakarta Sans',sans-serif; font-size:clamp(0.95rem,1.8vw,1.2rem); font-weight:300; color:#D4D4D8; letter-spacing:-0.02em; margin-bottom:0; transition:color 0.3s;">Creative Dev & Motion</h3>
+            <p class="skill-desc" style="font-family:'Plus Jakarta Sans',sans-serif; font-size:0.75rem; color:#86868B; font-weight:300; line-height:1.7; max-height:0; overflow:hidden; opacity:0; transition:max-height 0.4s ease, opacity 0.4s ease; margin-top:0;">Cinematic web experiences that push the boundaries of the browser.</p>
+          </div>
+          <div style="display:flex; flex-wrap:wrap; gap:7px; padding-top:2px;">
+            <span class="skill-tag">Three.js</span><span class="skill-tag">WebGL</span><span class="skill-tag">GSAP</span><span class="skill-tag">ScrollTrigger</span><span class="skill-tag">Framer Motion</span><span class="skill-tag">Cinematic Scrolling</span>
+          </div>
+        </div>
+      </div>
+      <div class="skill-row" style="border-top:1px solid rgba(229,229,229,0.07); padding:26px 0; cursor:default; transition:background 0.3s;">
+        <div class="skills-grid" style="display:grid; grid-template-columns:40px 1fr 1.6fr; gap:28px; align-items:start;">
+          <span style="font-family:monospace; font-size:0.6rem; color:#2a2a2a; letter-spacing:0.1em; padding-top:3px;">03</span>
+          <div>
+            <h3 class="skill-title" style="font-family:'Plus Jakarta Sans',sans-serif; font-size:clamp(0.95rem,1.8vw,1.2rem); font-weight:300; color:#D4D4D8; letter-spacing:-0.02em; margin-bottom:0; transition:color 0.3s;">Backend & API Architecture</h3>
+            <p class="skill-desc" style="font-family:'Plus Jakarta Sans',sans-serif; font-size:0.75rem; color:#86868B; font-weight:300; line-height:1.7; max-height:0; overflow:hidden; opacity:0; transition:max-height 0.4s ease, opacity 0.4s ease; margin-top:0;">Scalable, high-performance systems engineered for speed and reliability.</p>
+          </div>
+          <div style="display:flex; flex-wrap:wrap; gap:7px; padding-top:2px;">
+            <span class="skill-tag">PHP OOP/MVC</span><span class="skill-tag">Node.js</span><span class="skill-tag">Express.js</span><span class="skill-tag">MySQL</span><span class="skill-tag">RESTful APIs</span><span class="skill-tag">API Integration</span>
+          </div>
+        </div>
+      </div>
+      <div class="skill-row" style="border-top:1px solid rgba(229,229,229,0.07); padding:26px 0; cursor:default; transition:background 0.3s;">
+        <div class="skills-grid" style="display:grid; grid-template-columns:40px 1fr 1.6fr; gap:28px; align-items:start;">
+          <span style="font-family:monospace; font-size:0.6rem; color:#2a2a2a; letter-spacing:0.1em; padding-top:3px;">04</span>
+          <div>
+            <h3 class="skill-title" style="font-family:'Plus Jakarta Sans',sans-serif; font-size:clamp(0.95rem,1.8vw,1.2rem); font-weight:300; color:#D4D4D8; letter-spacing:-0.02em; margin-bottom:0; transition:color 0.3s;">E-Commerce & CMS</h3>
+            <p class="skill-desc" style="font-family:'Plus Jakarta Sans',sans-serif; font-size:0.75rem; color:#86868B; font-weight:300; line-height:1.7; max-height:0; overflow:hidden; opacity:0; transition:max-height 0.4s ease, opacity 0.4s ease; margin-top:0;">Enterprise-scale e-commerce platforms built for conversion and performance.</p>
+          </div>
+          <div style="display:flex; flex-wrap:wrap; gap:7px; padding-top:2px;">
+            <span class="skill-tag">WordPress</span><span class="skill-tag">WooCommerce</span><span class="skill-tag">Stripe & PayPal</span><span class="skill-tag">B2B Pricing</span><span class="skill-tag">Age Gateways</span><span class="skill-tag">Hook Architecture</span>
+          </div>
+        </div>
+      </div>
+      <div class="skill-row" style="border-top:1px solid rgba(229,229,229,0.07); border-bottom:1px solid rgba(229,229,229,0.07); padding:26px 0; cursor:default; transition:background 0.3s;">
+        <div class="skills-grid" style="display:grid; grid-template-columns:40px 1fr 1.6fr; gap:28px; align-items:start;">
+          <span style="font-family:monospace; font-size:0.6rem; color:#2a2a2a; letter-spacing:0.1em; padding-top:3px;">05</span>
+          <div>
+            <h3 class="skill-title" style="font-family:'Plus Jakarta Sans',sans-serif; font-size:clamp(0.95rem,1.8vw,1.2rem); font-weight:300; color:#D4D4D8; letter-spacing:-0.02em; margin-bottom:0; transition:color 0.3s;">AI & Modern Workflows</h3>
+            <p class="skill-desc" style="font-family:'Plus Jakarta Sans',sans-serif; font-size:0.75rem; color:#86868B; font-weight:300; line-height:1.7; max-height:0; overflow:hidden; opacity:0; transition:max-height 0.4s ease, opacity 0.4s ease; margin-top:0;">Future-ready pipelines with AI integration and security-first practices.</p>
+          </div>
+          <div style="display:flex; flex-wrap:wrap; gap:7px; padding-top:2px;">
+            <span class="skill-tag">AI-Augmented Dev</span><span class="skill-tag">ChatGPT / Claude</span><span class="skill-tag">LLM Firewall</span><span class="skill-tag">Prompt Injection</span><span class="skill-tag">Git & GitHub</span><span class="skill-tag">Media Optimization</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <style>
+    .skill-tag {
+      font-family:monospace; font-size:0.6rem; letter-spacing:0.08em; color:#86868B;
+      border:1px solid rgba(229,229,229,0.12); border-radius:100px; padding:5px 14px;
+      transition:all 0.3s ease; background: transparent;
+    }
+    .skill-row:hover .skill-tag { border-color:rgba(229,229,229,0.28); color:#C8C8C8; background: rgba(229,229,229,0.02); }
+    .skill-row:hover .skill-title { color:#fff !important; }
+    .skill-row:hover .skill-desc { max-height:60px !important; opacity:1 !important; margin-top:10px !important; }
+    .skill-row:hover { background: rgba(229,229,229,0.02); }
+    @media(max-width:768px){ .skills-grid { grid-template-columns: 32px 1fr !important; } .skills-grid > div:last-child { grid-column: 2 / -1; } }
+  </style>
+</section>
+
+<!-- EXPERIENCE (professional glow & spacing) -->
+<section id="experience" style="background:#000; padding:96px 0; border-top:1px solid rgba(229,229,229,0.07);">
+  <div style="max-width:1280px; margin:0 auto; padding:0 32px;">
+    <div class="section-header" style="margin-bottom:56px; opacity:0; transform:translateY(24px); transition:opacity 0.7s ease, transform 0.7s ease;">
+      <div style="display:flex; align-items:center; gap:12px; margin-bottom:14px;">
+        <span style="width:22px; height:1px; background:rgba(229,229,229,0.3);"></span>
+        <span style="font-family:monospace; font-size:0.6rem; letter-spacing:0.28em; color:#86868B; text-transform:uppercase;">Career</span>
+      </div>
+      <h2 style="font-family:'Plus Jakarta Sans',sans-serif; font-size:clamp(2rem,5vw,3.8rem); font-weight:200; color:#fff; letter-spacing:-0.04em;">Experience Narrative</h2>
+    </div>
+
+    <div style="display:flex; flex-direction:column; gap:20px;">
+      <div class="exp-card reveal-card" style="
+        position:relative; padding:40px 40px 40px 46px;
+        border:1px solid rgba(229,229,229,0.08); border-radius:16px;
+        opacity:0; transform:translateX(-40px); overflow:hidden;
+        transition: border-color 0.4s, background 0.4s, transform 0.3s;
+      ">
+        <div class="exp-border-glow" style="position:absolute; left:0; top:0; bottom:0; width:2px; background:linear-gradient(to bottom, rgba(229,229,229,0.7), rgba(229,229,229,0.15), transparent); opacity:0.2; transition:opacity 0.4s, width 0.4s;"></div>
+        <div class="exp-inner" style="display:grid; grid-template-columns:220px 1fr; gap:40px;">
+          <div>
+            <span style="font-family:monospace; font-size:0.58rem; letter-spacing:0.2em; color:#86868B; text-transform:uppercase; display:block; margin-bottom:14px;">June 2025 – Present</span>
+            <h3 style="font-family:'Plus Jakarta Sans',sans-serif; font-size:1.15rem; font-weight:300; color:#F5F5F7; letter-spacing:-0.02em; margin-bottom:8px;">Lead Web Developer</h3>
+            <p style="font-family:'Plus Jakarta Sans',sans-serif; font-size:0.72rem; color:#86868B; font-weight:300;">Weblinx Technologies</p>
+          </div>
+          <div style="display:flex; flex-direction:column; gap:11px;">
+            <div class="ach"><span class="ach-dot"></span><p>Architected end-to-end full-stack solutions for 5+ concurrent client projects, establishing scalable component-driven patterns that reduced onboarding time by 40%.</p></div>
+            <div class="ach"><span class="ach-dot"></span><p>Pioneered high-fidelity frontend experiences — Three.js WebGL environments and GSAP-driven narrative scroll animations — that measurably differentiated clients from competitors.</p></div>
+            <div class="ach"><span class="ach-dot"></span><p>Optimized legacy database layers through strategic query refactoring and multi-column indexing, cutting average API response times by 60% on data-heavy endpoints.</p></div>
+            <div class="ach"><span class="ach-dot"></span><p>Orchestrated team-wide adoption of AI-augmented development workflows, accelerating sprint velocity by an estimated 35%.</p></div>
+            <div class="ach"><span class="ach-dot"></span><p>Mentored a team of 4 junior developers through structured code reviews — reducing bug-regression rates by 50%.</p></div>
+            <div class="ach"><span class="ach-dot"></span><p>Spearheaded implementation of LLM Firewall concepts and Prompt Injection prevention strategies across the development pipeline.</p></div>
+          </div>
+        </div>
+      </div>
+      <div class="exp-card reveal-card" style="
+        position:relative; padding:40px 40px 40px 46px;
+        border:1px solid rgba(229,229,229,0.08); border-radius:16px;
+        opacity:0; transform:translateX(-40px); overflow:hidden;
+        transition: border-color 0.4s, background 0.4s, transform 0.3s;
+      ">
+        <div class="exp-border-glow" style="position:absolute; left:0; top:0; bottom:0; width:2px; background:linear-gradient(to bottom, rgba(229,229,229,0.7), rgba(229,229,229,0.15), transparent); opacity:0.2; transition:opacity 0.4s, width 0.4s;"></div>
+        <div class="exp-inner" style="display:grid; grid-template-columns:220px 1fr; gap:40px;">
+          <div>
+            <span style="font-family:monospace; font-size:0.58rem; letter-spacing:0.2em; color:#86868B; text-transform:uppercase; display:block; margin-bottom:14px;">2023 – Present</span>
+            <h3 style="font-family:'Plus Jakarta Sans',sans-serif; font-size:1.15rem; font-weight:300; color:#F5F5F7; letter-spacing:-0.02em; margin-bottom:8px;">Freelance Full-Stack Developer</h3>
+            <p style="font-family:'Plus Jakarta Sans',sans-serif; font-size:0.72rem; color:#86868B; font-weight:300;">Self-Employed</p>
+          </div>
+          <div style="display:flex; flex-direction:column; gap:11px;">
+            <div class="ach"><span class="ach-dot"></span><p>Engineered dark-themed, cinematic portfolio platforms for authors, clinicians, and biotech firms using Three.js WebGL and GSAP ScrollTrigger, achieving 95+ Lighthouse scores.</p></div>
+            <div class="ach"><span class="ach-dot"></span><p>Architected a custom WooCommerce ecosystem handling a 12,000+ product catalog with B2B wholesale tiered pricing, age verification gateways, and Stripe/PayPal multi-currency checkout — achieving sub-2-second load times.</p></div>
+            <div class="ach"><span class="ach-dot"></span><p>Integrated international payment gateway solutions, reducing cart abandonment by an estimated 25% through friction-optimized checkout flow.</p></div>
+            <div class="ach"><span class="ach-dot"></span><p>Maintained 100% client satisfaction rate with documented repeat business across diverse verticals.</p></div>
+          </div>
+        </div>
+      </div>
+      <div class="exp-card reveal-card" style="
+        position:relative; padding:40px 40px 40px 46px;
+        border:1px solid rgba(229,229,229,0.08); border-radius:16px;
+        opacity:0; transform:translateX(-40px); overflow:hidden;
+        transition: border-color 0.4s, background 0.4s, transform 0.3s;
+      ">
+        <div class="exp-border-glow" style="position:absolute; left:0; top:0; bottom:0; width:2px; background:linear-gradient(to bottom, rgba(229,229,229,0.7), rgba(229,229,229,0.15), transparent); opacity:0.2; transition:opacity 0.4s, width 0.4s;"></div>
+        <div class="exp-inner" style="display:grid; grid-template-columns:220px 1fr; gap:40px;">
+          <div>
+            <span style="font-family:monospace; font-size:0.58rem; letter-spacing:0.2em; color:#86868B; text-transform:uppercase; display:block; margin-bottom:14px;">2024 – 2025</span>
+            <h3 style="font-family:'Plus Jakarta Sans',sans-serif; font-size:1.15rem; font-weight:300; color:#F5F5F7; letter-spacing:-0.02em; margin-bottom:8px;">WordPress Developer</h3>
+            <p style="font-family:'Plus Jakarta Sans',sans-serif; font-size:0.72rem; color:#86868B; font-weight:300;">Techclone Pvt Ltd</p>
+          </div>
+          <div style="display:flex; flex-direction:column; gap:11px;">
+            <div class="ach"><span class="ach-dot"></span><p>Developed 8+ custom WordPress themes from scratch using Hook Architecture (Actions & Filters), producing decoupled, maintainable codebases.</p></div>
+            <div class="ach"><span class="ach-dot"></span><p>Optimized site performance through aggressive caching strategies, image optimization (WebP/AVIF), and CDN integration, achieving 40% faster load times.</p></div>
+            <div class="ach"><span class="ach-dot"></span><p>Implemented custom plugin solutions for complex business logic, reducing dependency on third-party plugins by 60%.</p></div>
+            <div class="ach"><span class="ach-dot"></span><p>Collaborated with design teams to create pixel-perfect responsive interfaces with seamless cross-browser compatibility.</p></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <style>
+    .ach { display:flex; gap:12px; align-items:flex-start; }
+    .ach-dot { display:inline-block; margin-top:9px; width:4px; height:4px; border-radius:50%; background:rgba(229,229,229,0.25); flex-shrink:0; }
+    .ach p { font-family:'Plus Jakarta Sans',sans-serif; font-size:0.78rem; font-weight:300; color:#86868B; line-height:1.85; }
+    .exp-card:hover { border-color:rgba(229,229,229,0.25) !important; background:rgba(229,229,229,0.025) !important; transform: translateY(-2px); }
+    .exp-card:hover .exp-border-glow { opacity:0.9 !important; width:3px !important; }
+  </style>
+</section>
+
+<!-- FOOTER / CONTACT (luxe spacing) -->
+<footer id="contact" style="background:#0A0A0A; border-top:1px solid rgba(229,229,229,0.07);">
+  <div style="max-width:1280px; margin:0 auto; padding:80px 32px 36px;">
+    <div style="margin-bottom:56px;">
+      <h2 class="footer-headline" style="
+        font-family:'Plus Jakarta Sans',sans-serif;
+        font-size:clamp(2.2rem,8vw,7rem);
+        font-weight:200; letter-spacing:-0.045em;
+        color:#fff; line-height:0.93; margin:0;
+        opacity:0; transform:translateY(40px);
+        transition:opacity 0.9s ease, transform 0.9s ease;
+      ">
+        Let's Build<br>
+        <span style="color:#86868B;">Something</span><br>
+        Immersive.
+      </h2>
+      <div style="margin-top:24px; width:56px; height:1px; background:rgba(229,229,229,0.2);"></div>
+    </div>
+
+    <div class="footer-contacts" style="display:grid; grid-template-columns:repeat(4,1fr); gap:14px; margin-bottom:56px;">
+      <a href="mailto:Myswork14@gmail.com" class="contact-card" style="padding:22px; border:1px solid rgba(229,229,229,0.08); border-radius:14px; text-decoration:none; display:block; transition:all 0.4s;">
+        <span style="font-family:monospace; font-size:0.58rem; letter-spacing:0.2em; color:#3a3a3a; text-transform:uppercase; display:block; margin-bottom:8px;">Email</span>
+        <span style="font-family:'Plus Jakarta Sans',sans-serif; font-size:0.8rem; font-weight:300; color:#F5F5F7;">Myswork14@gmail.com</span>
+      </a>
+      <a href="tel:+923162623424" class="contact-card" style="padding:22px; border:1px solid rgba(229,229,229,0.08); border-radius:14px; text-decoration:none; display:block; transition:all 0.4s;">
+        <span style="font-family:monospace; font-size:0.58rem; letter-spacing:0.2em; color:#3a3a3a; text-transform:uppercase; display:block; margin-bottom:8px;">Phone</span>
+        <span style="font-family:'Plus Jakarta Sans',sans-serif; font-size:0.8rem; font-weight:300; color:#F5F5F7;">+92 316 2623424</span>
+      </a>
+      <a href="https://muhammad-yousuf.42web.io" target="_blank" rel="noopener" class="contact-card" style="padding:22px; border:1px solid rgba(229,229,229,0.08); border-radius:14px; text-decoration:none; display:block; transition:all 0.4s;">
+        <span style="font-family:monospace; font-size:0.58rem; letter-spacing:0.2em; color:#3a3a3a; text-transform:uppercase; display:block; margin-bottom:8px;">Portfolio</span>
+        <span style="font-family:'Plus Jakarta Sans',sans-serif; font-size:0.8rem; font-weight:300; color:#F5F5F7;">muhammad-yousuf.42web.io</span>
+      </a>
+      <div class="contact-card" style="padding:22px; border:1px solid rgba(229,229,229,0.08); border-radius:14px; transition:all 0.4s; cursor:default;">
+        <span style="font-family:monospace; font-size:0.58rem; letter-spacing:0.2em; color:#3a3a3a; text-transform:uppercase; display:block; margin-bottom:8px;">Location</span>
+        <span style="font-family:'Plus Jakarta Sans',sans-serif; font-size:0.8rem; font-weight:300; color:#F5F5F7;">Karachi, PK · Remote</span>
+      </div>
+    </div>
+
+    <div style="padding-top:20px; border-top:1px solid rgba(229,229,229,0.07); display:flex; flex-wrap:wrap; gap:14px; align-items:center; justify-content:space-between;">
+      <p style="font-family:monospace; font-size:0.6rem; letter-spacing:0.1em; color:#2e2e2e;">
+        © 2025 Muhammad Yousuf Siddiqui. All rights reserved.
+      </p>
+      <button id="back-to-top" onclick="window.scrollTo({top:0,behavior:'smooth'})" style="
+        font-family:monospace; font-size:0.6rem; letter-spacing:0.15em; color:#86868B;
+        text-transform:uppercase; background:transparent;
+        border:1px solid rgba(229,229,229,0.12); border-radius:100px;
+        padding:9px 20px; cursor:pointer; transition:all 0.3s;
+      ">↑ Back to Top</button>
+    </div>
+  </div>
+  <style>
+    .contact-card:hover { border-color:rgba(229,229,229,0.3) !important; background:rgba(229,229,229,0.03) !important; }
+    #back-to-top:hover { border-color:rgba(229,229,229,0.4) !important; color:#F5F5F7 !important; background: rgba(229,229,229,0.03); }
+    @media(max-width:768px){ .footer-contacts { grid-template-columns:1fr 1fr !important; } }
+  </style>
+</footer>
+
+<script>
+  (function() {
+    // ─── CURSOR (smoother, professional) ──────────────────────────────
+    const ring = document.getElementById('cursor-ring');
+    const dot  = document.getElementById('cursor-dot');
+    if (!ring || !dot) return;
+    let rx = 0, ry = 0, tx = 0, ty = 0;
+    const updateCursor = (e) => {
+      tx = e.clientX; ty = e.clientY;
+      dot.style.left = tx + 'px';
+      dot.style.top  = ty + 'px';
+    };
+    window.addEventListener('mousemove', updateCursor, { passive: true });
+    window.addEventListener('touchmove', (e) => {
+      if (e.touches.length) updateCursor(e.touches[0]);
+    }, { passive: true });
+
+    function animateCursor() {
+      rx += (tx - rx) * 0.09;
+      ry += (ty - ry) * 0.09;
+      ring.style.left = rx + 'px';
+      ring.style.top  = ry + 'px';
+      requestAnimationFrame(animateCursor);
+    }
+    animateCursor();
+
+    const interactiveElements = document.querySelectorAll('a,button,.metric-cell,.skill-row,.exp-card,.contact-card');
+    interactiveElements.forEach(el => {
+      el.addEventListener('mouseenter', () => {
+        ring.style.transform = 'translate(-50%,-50%) scale(2.3)';
+        ring.style.borderColor = 'rgba(229,229,229,0.65)';
+      });
+      el.addEventListener('mouseleave', () => {
+        ring.style.transform = 'translate(-50%,-50%) scale(1)';
+        ring.style.borderColor = 'rgba(229,229,229,0.35)';
+      });
+    });
+
+    // ─── PRELOADER (smooth exit) ──────────────────────────────────────
+    const numEl = document.getElementById('preloader-num');
+    const barEl = document.getElementById('preloader-bar');
+    const preEl = document.getElementById('preloader');
+    let val = 0;
+    const preInterval = setInterval(() => {
+      val += Math.random() * 16 + 6;
+      if (val >= 100) {
+        val = 100;
+        clearInterval(preInterval);
+        if (numEl) numEl.textContent = '100';
+        if (barEl) barEl.style.width = '100%';
+        setTimeout(() => {
+          if (preEl) {
+            preEl.style.opacity = '0';
+            preEl.style.transform = 'translateY(-100%)';
+            setTimeout(() => {
+              if (preEl) preEl.style.display = 'none';
+              triggerHero();
+            }, 900);
+          }
+        }, 500);
+      } else {
+        if (numEl) numEl.textContent = Math.round(val);
+        if (barEl) barEl.style.width = val + '%';
+      }
+    }, 140);
+
+    function triggerHero() {
+      ['hero-eyebrow','hero-sub','hero-loc','scroll-hint'].forEach(id => {
+        const el = document.getElementById(id);
+        if (el) { el.style.opacity = '1'; el.style.transform = 'translateY(0)'; }
+      });
+      document.querySelectorAll('.hero-word').forEach(el => {
+        el.style.opacity = '1';
+        el.style.transform = 'translateY(0)';
+      });
+    }
+
+    // ─── NAVBAR SCROLL (glass effect) ─────────────────────────────────
+    const navbar = document.getElementById('navbar');
+    window.addEventListener('scroll', () => {
+      if (!navbar) return;
+      if (window.scrollY > 60) {
+        navbar.style.background = 'rgba(0,0,0,0.78)';
+        navbar.style.backdropFilter = 'blur(24px)';
+        navbar.style.webkitBackdropFilter = 'blur(24px)';
+        navbar.style.borderBottomColor = 'rgba(229,229,229,0.08)';
+      } else {
+        navbar.style.background = 'transparent';
+        navbar.style.backdropFilter = 'none';
+        navbar.style.webkitBackdropFilter = 'none';
+        navbar.style.borderBottomColor = 'transparent';
+      }
+    }, { passive: true });
+
+    // ─── PARTICLE CANVAS (refined density) ────────────────────────────
+    (function() {
+      const canvas = document.getElementById('particle-canvas');
+      if (!canvas) return;
+      const ctx = canvas.getContext('2d');
+      const COUNT = 750;
+      const particles = [];
+      const mouse = { x: -9999, y: -9999 };
+
+      function resize() {
+        canvas.width  = window.innerWidth;
+        canvas.height = window.innerHeight;
+      }
+      resize();
+      window.addEventListener('resize', resize);
+
+      window.addEventListener('mousemove', e => { mouse.x = e.clientX; mouse.y = e.clientY; });
+
+      for (let i = 0; i < COUNT; i++) {
+        particles.push({
+          x: Math.random() * window.innerWidth,
+          y: Math.random() * window.innerHeight,
+          vx: (Math.random() - 0.5) * 0.09,
+          vy: (Math.random() - 0.5) * 0.09,
+          r:  Math.random() * 1.2 + 0.3,
+          a:  Math.random() * 0.5 + 0.1,
+          ph: Math.random() * Math.PI * 2,
+        });
+      }
+
+      let t = 0;
+      function draw() {
+        if (!canvas || !ctx) return;
+        t += 0.0025;
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        for (const p of particles) {
+          const dx = mouse.x - p.x, dy = mouse.y - p.y;
+          const dist = Math.sqrt(dx*dx + dy*dy);
+          const inf = Math.max(0, 1 - dist / 280);
+
+          p.x += p.vx + dx * inf * 0.001 + Math.sin(t + p.ph) * 0.06;
+          p.y += p.vy + dy * inf * 0.001 + Math.cos(t * 0.7 + p.ph) * 0.05;
+
+          if (p.x < 0) p.x = canvas.width;
+          if (p.x > canvas.width)  p.x = 0;
+          if (p.y < 0) p.y = canvas.height;
+          if (p.y > canvas.height) p.y = 0;
+
+          const pulse = Math.sin(t * 1.6 + p.ph) * 0.12 + 0.9;
+          const bright = Math.round(185 + inf * 70);
+          ctx.beginPath();
+          ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+          ctx.fillStyle = `rgba(${bright},${bright},${bright},${p.a * pulse})`;
+          ctx.fill();
+        }
+        requestAnimationFrame(draw);
+      }
+      draw();
+    })();
+
+    // ─── INTERSECTION OBSERVER – reveal elements ──────────────────────
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          e.target.style.opacity  = '1';
+          e.target.style.transform = 'translate(0,0)';
+          io.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.12 });
+
+    document.querySelectorAll('.reveal-card, .section-header, .footer-headline').forEach((el, i) => {
+      el.style.transition = `opacity 0.8s ease ${i * 0.07}s, transform 0.85s cubic-bezier(0.16,1,0.3,1) ${i * 0.07}s`;
+      io.observe(el);
+    });
+
+    // ─── METRICS COUNT-UP (stable) ────────────────────────────────────
+    const metricObs = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          const cells = e.target.querySelectorAll('.metric-cell');
+          cells.forEach(cell => {
+            const target = parseInt(cell.dataset.target, 10);
+            const numEl  = cell.querySelector('.metric-num');
+            if (!numEl || isNaN(target)) return;
+            const start  = Date.now();
+            const dur    = 2200;
+            const tick   = () => {
+              const prog = Math.min((Date.now() - start) / dur, 1);
+              const ease = 1 - Math.pow(1 - prog, 3);
+              numEl.textContent = Math.round(ease * target).toLocaleString();
+              if (prog < 1) requestAnimationFrame(tick);
+            };
+            requestAnimationFrame(tick);
+          });
+          metricObs.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.25 });
+
+    const metricsContainer = document.querySelector('#metrics > div > div');
+    if (metricsContainer) metricObs.observe(metricsContainer);
+
+    // ─── SMOOTH ANCHOR SCROLL (robust) ────────────────────────────────
+    document.querySelectorAll('a[href^="#"]').forEach(a => {
+      a.addEventListener('click', e => {
+        const target = document.querySelector(a.getAttribute('href'));
+        if (target) {
+          e.preventDefault();
+          target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+      });
+    });
+
+    // Fix back-to-top button in case it gets detached
+    const backBtn = document.getElementById('back-to-top');
+    if (backBtn) {
+      backBtn.addEventListener('click', () => window.scrollTo({top:0, behavior:'smooth'}));
+    }
+  })();
+</script>
+</body>
+</html>
